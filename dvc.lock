@@ -1,0 +1,52 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/stock_dataset.csv
+      md5: b3d7886a631d60993b74c945418b8aa1
+      size: 128341
+    - path: src/train.py
+      md5: f7fd0b0f6bd0b3eb64b1a6d5844d6f64
+      size: 2394
+    outs:
+    - path: data/processed/X_train.csv
+      md5: 0a17447a45f3972ddffc94655b506a76
+      size: 56775
+    - path: data/processed/X_valid.csv
+      md5: fa609834532842c2afa8a328602366a2
+      size: 64080
+    - path: data/processed/y_train.csv
+      md5: 620fd19b42125485ff85a74dce753a3c
+      size: 7224
+    - path: data/processed/y_valid.csv
+      md5: 3f98e0776921e11862e8ea11dba1bf0f
+      size: 8348
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed/X_train.csv
+      md5: 0a17447a45f3972ddffc94655b506a76
+      size: 56775
+    - path: data/processed/X_valid.csv
+      md5: fa609834532842c2afa8a328602366a2
+      size: 64080
+    - path: data/processed/y_train.csv
+      md5: 620fd19b42125485ff85a74dce753a3c
+      size: 7224
+    - path: data/processed/y_valid.csv
+      md5: 3f98e0776921e11862e8ea11dba1bf0f
+      size: 8348
+    - path: src/evaluate.py
+      md5: 5bb0a9b8f0c824c743008d5290deee48
+      size: 5611
+    params:
+      params.yaml:
+        evaluate.batch_size: 1
+        evaluate.epochs: 1
+        evaluate.verbose: 2
+    outs:
+    - path: data/predicted/
+      md5: ec5d7abfff94bc8f8035cdd6c3aed94a.dir
+      size: 19370
+      nfiles: 1

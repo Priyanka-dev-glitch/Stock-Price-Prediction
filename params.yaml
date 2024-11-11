@@ -1,0 +1,5 @@
+evaluate:
+  epochs: 1
+  batch_size: 1
+  verbose: 2
+
